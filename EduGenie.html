@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>EduGenie — AI Learning Studio</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{box-sizing:border-box}body{font-family:Inter,sans-serif;background:#080c18;color:#eef2ff}
+
+h1,h2,h3,.brand{font-family:"Space Grotesk",sans-serif}
+
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(124,92,255,.16),transparent 28%),radial-gradient(circle at 90% 20%,rgba(56,217,255,.11),transparent 24%)}
+
+.glass{background:rgba(17,24,43,.78);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px)}
+
+.navactive{background:linear-gradient(135deg,rgba(124,92,255,.22),rgba(56,217,255,.08));border-color:rgba(124,92,255,.45);color:#fff}
+
+.view{display:none}.view.active{display:block}.field{background:#0c1325;border:1px solid #273252;outline:none}.field:focus{border-color:#7c5cff;box-shadow:0 0 0 3px rgba(124,92,255,.12)}
+
+.gradient-text{background:linear-gradient(90deg,#a78bfa,#38d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.btn{transition:.2s}.btn:hover{transform:translateY(-1px)}.fade{animation:fade .35s ease}
+
+@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+
+.choice{cursor:pointer;border:1px solid #293552;background:#0c1325;transition:.2s}.choice:hover{border-color:#7c5cff;background:#141c35}
+
+.choice.correct{border-color:#34d399;background:rgba(52,211,153,.1)}.choice.wrong{border-color:#fb7185;background:rgba(251,113,133,.1)}
+
+::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:#303b61;border-radius:10px}
+
+</style>
+
+</head>
+
+<body class="min-h-screen">
+
+<header class="sticky top-0 z-50 border-b border-white/5 bg-[#080c18]/85 backdrop-blur-xl">
+
+<div class="max-w-7xl mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
+
+<button onclick="showView('home')" class="flex items-center gap-3">
+
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-400 grid place-items-center"><i class="fa-solid fa-brain"></i></div>
+
+<div class="text-left"><div class="brand font-bold text-lg">Edu<span class="gradient-text">Genie</span></div><div class="text-[9px] tracking-[.22em] text-slate-500 uppercase">AI Learning Studio</div></div>
+
+</button>
+
+<nav class="hidden md:flex gap-2">
+
+<button data-view="home" onclick="showView('home')" class="nav px-4 py-2 rounded-xl border border-transparent text-sm text-slate-400 navactive">Home</button>
+
+<button data-view="ask" onclick="showView('ask')" class="nav px-4 py-2 rounded-xl border border-transparent text-sm text-slate-400">Ask AI</button>
+
+<button data-view="tools" onclick="showView('tools')" class="nav px-4 py-2 rounded-xl border border-transparent text-sm text-slate-400">Study Tools</button>
+
+<button data-view="quiz" onclick="showView('quiz')" class="nav px-4 py-2 rounded-xl border border-transparent text-sm text-slate-400">Quiz</button>
+
+<button data-view="roadmap" onclick="showView('roadmap')" class="nav px-4 py-2 rounded-xl border border-transparent text-sm text-slate-400">Roadmap</button>
+
+</nav>
+
+<button onclick="openSettings()" class="w-10 h-10 rounded-xl glass"><i class="fa-solid fa-gear"></i></button>
+
+</div></header>
+
+
+
+<main class="max-w-7xl mx-auto px-4 lg:px-6 py-7 pb-16">
+
+<section id="view-home" class="view active fade">
+
+<div class="glass rounded-3xl p-7 md:p-12 overflow-hidden relative">
+
+<div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-violet-600/10 blur-3xl"></div>
+
+<div class="max-w-3xl relative">
+
+<span class="inline-flex px-3 py-1.5 rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-200 text-xs font-semibold">✦ PERSONAL AI STUDY COMPANION</span>
+
+<h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-5">Study smarter.<br><span class="gradient-text">Understand deeper.</span></h1>
+
+<p class="text-slate-400 text-base md:text-lg mt-5 max-w-2xl leading-7">Ask questions, simplify difficult concepts, summarize notes, generate quizzes and build a practical learning roadmap — all in one focused workspace.</p>
+
+<div class="flex flex-wrap gap-3 mt-7"><button onclick="showView('ask')" class="btn px-5 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 font-bold">Ask EduGenie →</button><button onclick="showView('tools')" class="btn px-5 py-3 rounded-xl glass font-semibold">Open Study Tools</button></div>
+
+</div></div>
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+
+<div onclick="showView('ask')" class="glass rounded-2xl p-5 cursor-pointer hover:border-violet-400/40"><i class="fa-solid fa-comments text-violet-400 text-xl"></i><h3 class="font-bold mt-4">Ask AI</h3><p class="text-sm text-slate-500 mt-1">Clear answers with examples.</p></div>
+
+<div onclick="showView('tools')" class="glass rounded-2xl p-5 cursor-pointer hover:border-cyan-400/40"><i class="fa-solid fa-book-open text-cyan-400 text-xl"></i><h3 class="font-bold mt-4">Study Tools</h3><p class="text-sm text-slate-500 mt-1">Explain and summarize notes.</p></div>
+
+<div onclick="showView('quiz')" class="glass rounded-2xl p-5 cursor-pointer hover:border-emerald-400/40"><i class="fa-solid fa-brain text-emerald-400 text-xl"></i><h3 class="font-bold mt-4">AI Quiz</h3><p class="text-sm text-slate-500 mt-1">Practice with instant feedback.</p></div>
+
+<div onclick="showView('roadmap')" class="glass rounded-2xl p-5 cursor-pointer hover:border-purple-300/40"><i class="fa-solid fa-route text-purple-300 text-xl"></i><h3 class="font-bold mt-4">Roadmap</h3><p class="text-sm text-slate-500 mt-1">Turn a goal into stages.</p></div>
+
+</div></section>
+
+
+
+<section id="view-ask" class="view fade"><div class="grid lg:grid-cols-[.8fr_1.2fr] gap-5">
+
+<div class="glass rounded-2xl p-6"><div class="flex items-center gap-3"><div class="w-11 h-11 rounded-xl bg-violet-500/15 text-violet-300 grid place-items-center">AI</div><div><h2 class="font-bold text-xl">Ask EduGenie</h2><p class="text-xs text-slate-500">Your learning question</p></div></div>
+
+<textarea id="askInput" rows="9" class="field w-full rounded-xl p-4 mt-6 text-sm" placeholder="Example: Explain pointers in C with a simple real-world example..."></textarea>
+
+<div class="flex flex-wrap gap-2 mt-3"><button onclick="fill('askInput','Explain recursion in C with a simple example')" class="text-xs px-3 py-2 rounded-lg glass text-slate-400">Recursion</button><button onclick="fill('askInput','What is inheritance in Java? Explain with an example.')" class="text-xs px-3 py-2 rounded-lg glass text-slate-400">Java</button><button onclick="fill('askInput','Explain machine learning in simple terms.')" class="text-xs px-3 py-2 rounded-lg glass text-slate-400">ML</button></div>
+
+<button onclick="askAI()" class="btn w-full mt-4 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 font-bold">Generate Answer →</button></div>
+
+<div class="glass rounded-2xl p-6 min-h-[420px]"><div class="flex justify-between border-b border-white/5 pb-4"><h3 class="font-bold">EduGenie response</h3><button onclick="copyOutput('askOutput')" class="text-xs text-slate-500">Copy</button></div><div id="askOutput" class="pt-5 text-sm text-slate-300 leading-7 text-slate-600">Your answer will appear here.</div></div>
+
+</div></section>
+
+
+
+<section id="view-tools" class="view fade"><div class="grid md:grid-cols-2 gap-5">
+
+<div class="glass rounded-2xl p-6"><h2 class="font-bold text-xl">Explain a Topic</h2><p class="text-xs text-slate-500 mt-1">Choose your learning level.</p><input id="explainTopic" class="field w-full rounded-xl p-3 mt-5 text-sm" placeholder="e.g. Dynamic Memory Allocation"><select id="explainLevel" class="field w-full rounded-xl p-3 mt-3 text-sm"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><button onclick="explainAI()" class="btn w-full mt-3 py-3 rounded-xl bg-violet-600 font-bold">Explain Topic</button></div>
+
+<div class="glass rounded-2xl p-6"><h2 class="font-bold text-xl">Summarize Notes</h2><p class="text-xs text-slate-500 mt-1">Paste class notes or study material.</p><textarea id="summaryText" rows="6" class="field w-full rounded-xl p-3 mt-5 text-sm" placeholder="Paste your notes here..."></textarea><button onclick="summarizeAI()" class="btn w-full mt-3 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold">Summarize</button></div>
+
+</div><div class="glass rounded-2xl p-6 mt-5 min-h-[280px]"><div class="flex justify-between border-b border-white/5 pb-4"><h3 class="font-bold">Study Tool Output</h3><button onclick="copyOutput('toolOutput')" class="text-xs text-slate-500">Copy</button></div><div id="toolOutput" class="pt-5 text-sm text-slate-600">Choose a tool above to begin.</div></div></section>
+
+
+
+<section id="view-quiz" class="view fade"><div class="glass rounded-2xl p-6 max-w-3xl mx-auto"><h2 class="font-bold text-xl">AI Quiz Arena</h2><p class="text-xs text-slate-500 mt-1">Generate 3 questions and test yourself.</p><div class="flex gap-3 mt-6"><input id="quizTopic" class="field flex-1 rounded-xl p-3 text-sm" placeholder="Topic e.g. OOP in Java"><button onclick="generateQuiz()" class="btn px-5 rounded-xl bg-emerald-400 text-slate-950 font-bold">Generate</button></div></div><div id="quizOutput" class="mt-5 space-y-4 max-w-3xl mx-auto"></div></section>
+
+
+
+<section id="view-roadmap" class="view fade"><div class="glass rounded-2xl p-6 max-w-3xl mx-auto"><h2 class="font-bold text-xl">Learning Roadmap</h2><p class="text-sm text-slate-500 mt-1">Build a realistic path from beginner to advanced.</p><div class="grid md:grid-cols-2 gap-3 mt-5"><input id="roadTopic" class="field rounded-xl p-3 text-sm" placeholder="Skill e.g. React JS"><input id="roadGoal" class="field rounded-xl p-3 text-sm" placeholder="Goal e.g. Build a portfolio"></div><button onclick="generateRoadmap()" class="btn w-full mt-3 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 font-bold">Build My Roadmap</button></div><div id="roadOutput" class="glass rounded-2xl p-6 mt-5 max-w-4xl mx-auto text-sm leading-7 text-slate-300">Your roadmap will appear here.</div></section>
+
+</main>
+
+<footer class="text-center text-xs text-slate-600 pb-8">EduGenie AI Learning Studio • Standalone single-file edition</footer>
+
+
+
+<div id="settings" class="hidden fixed inset-0 z-[70] bg-black/70 backdrop-blur-sm p-4 items-center justify-center"><div class="glass rounded-2xl p-6 w-full max-w-lg"><div class="flex justify-between"><h2 class="font-bold text-xl">AI Settings</h2><button onclick="closeSettings()">✕</button></div><p class="text-xs text-slate-500 mt-2">Gemini is securely configured on the server. Your API key is never stored in this page.</p><div class="mt-5 rounded-xl border border-white/10 bg-slate-900/50 p-4"><div class="text-sm font-semibold text-emerald-300">✓ Secure server configuration</div><p class="text-xs text-slate-400 mt-2">The Gemini API key is stored in the server .env file and is not exposed to the browser.</p></div><button onclick="closeSettings()" class="btn w-full mt-5 py-3 rounded-xl bg-violet-600 font-bold">Close</button></div></div>
+
+
+
+<script>
+
+function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById("view-"+id).classList.add("active");document.querySelectorAll(".nav").forEach(b=>b.classList.remove("navactive"));const n=document.querySelector(`[data-view="${id}"]`);if(n)n.classList.add("navactive");scrollTo({top:0,behavior:"smooth"})}
+
+function fill(id,t){document.getElementById(id).value=t}
+
+function openSettings(){const x=document.getElementById("settings");x.classList.remove("hidden");x.classList.add("flex")}
+
+function closeSettings(){const x=document.getElementById("settings");x.classList.add("hidden");x.classList.remove("flex")}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+function formatAI(s){
+    let x = escapeHtml(s);
+    x = x
+      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-white'>$1</strong>")
+      .replace(/^### (.*)$/gm, "<h3 class='text-lg font-bold text-white mt-5 mb-2'>$1</h3>")
+      .replace(/^## (.*)$/gm, "<h2 class='text-xl font-bold text-white mt-5 mb-2'>$1</h2>")
+      .replace(/^- (.*)$/gm, "<li class='ml-5 list-disc'>$1</li>")
+      .replace(/\n\n/g, "<div class='h-2'></div>")
+      .replace(/\n/g, "<br>");
+    return x;
+}
+
+async function api(path,payload){
+    const API_BASE = window.location.protocol === "file:"
+        ? "http://127.0.0.1:8000"
+        : "";
+
+    const r = await fetch(API_BASE + path,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(payload)
+    });
+
+    let d;
+    try{
+        d = await r.json();
+    }catch{
+        throw new Error("Server returned an invalid response.");
+    }
+
+    if(!r.ok) throw new Error(d?.error || "Server error");
+    return d;
+}
+
+async function checkServer(){
+    if(window.location.protocol !== "file:") return true;
+
+    try{
+        const r = await fetch("http://127.0.0.1:8000/health");
+        return r.ok;
+    }catch{
+        return false;
+    }
+}
+
+function loading(id,msg){document.getElementById(id).innerHTML=`<div class="text-violet-300"><i class="fa-solid fa-spinner fa-spin mr-2"></i>${escapeHtml(msg)}</div>`}
+
+function errorBox(e){return `<div class="rounded-xl border border-rose-400/20 bg-rose-400/5 p-4 text-rose-200 text-sm">${escapeHtml(e.message||"Something went wrong.")}</div>`}
+
+function copyOutput(id){navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>alert("Copied"))}
+
+
+
+async function askAI(){
+    if(!(await checkServer())){
+        document.getElementById("askOutput").innerHTML =
+          errorBox(new Error("EduGenie server is not running. Start: uvicorn main:app --reload"));
+        return;
+    }
+
+    const q=document.getElementById("askInput").value.trim();
+
+    if(!q)return alert("Enter a question first");
+
+    loading("askOutput","Thinking...");
+
+    try{const d=await api("/qa",{question:q});document.getElementById("askOutput").innerHTML=formatAI(d.answer)}
+
+    catch(e){document.getElementById("askOutput").innerHTML=errorBox(e)}
+
+}
+
+
+
+async function explainAI(){
+    if(!(await checkServer())){
+        document.getElementById("toolOutput").innerHTML =
+          errorBox(new Error("EduGenie server is not running. Start: uvicorn main:app --reload"));
+        return;
+    }
+
+    const t=document.getElementById("explainTopic").value.trim(),l=document.getElementById("explainLevel").value;
+
+    if(!t)return alert("Enter a topic");
+
+    loading("toolOutput","Building explanation...");
+
+    try{const d=await api("/explain",{topic:t,level:l});document.getElementById("toolOutput").innerHTML=formatAI(d.answer)}
+
+    catch(e){document.getElementById("toolOutput").innerHTML=errorBox(e)}
+
+}
+
+
+
+async function summarizeAI(){
+    if(!(await checkServer())){
+        document.getElementById("toolOutput").innerHTML =
+          errorBox(new Error("EduGenie server is not running. Start: uvicorn main:app --reload"));
+        return;
+    }
+
+    const t=document.getElementById("summaryText").value.trim();
+
+    if(!t)return alert("Paste notes first");
+
+    loading("toolOutput","Summarizing...");
+
+    try{const d=await api("/summarize",{text:t});document.getElementById("toolOutput").innerHTML=formatAI(d.answer)}
+
+    catch(e){document.getElementById("toolOutput").innerHTML=errorBox(e)}
+
+}
+
+
+
+async function generateRoadmap(){
+    if(!(await checkServer())){
+        document.getElementById("roadOutput").innerHTML =
+          errorBox(new Error("EduGenie server is not running. Start: uvicorn main:app --reload"));
+        return;
+    }
+
+    const t=document.getElementById("roadTopic").value.trim(),g=document.getElementById("roadGoal").value.trim()||"college-level understanding";
+
+    if(!t)return alert("Enter a skill");
+
+    loading("roadOutput","Designing roadmap...");
+
+    try{const d=await api("/learn/recommendations",{topic:t,goal:g});document.getElementById("roadOutput").innerHTML=formatAI(d.answer)}
+
+    catch(e){document.getElementById("roadOutput").innerHTML=errorBox(e)}
+
+}
+
+
+
+async function generateQuiz(){
+    if(!(await checkServer())){
+        document.getElementById("quizOutput").innerHTML =
+          errorBox(new Error("EduGenie server is not running. Start: uvicorn main:app --reload"));
+        return;
+    }
+
+    const t=document.getElementById("quizTopic").value.trim();
+
+    if(!t)return alert("Enter a topic");
+
+    loading("quizOutput","Creating quiz...");
+
+    try{const d=await api("/quiz",{topic:t});renderQuiz(d)}
+
+    catch(e){document.getElementById("quizOutput").innerHTML=errorBox(e)}
+
+}
+
+
+
+function renderQuiz(d){window.__quizQuestions=d.questions;
+
+    document.getElementById("quizOutput").innerHTML=d.questions.map((q,i)=>`
+
+    <div class="glass rounded-2xl p-5">
+
+      <div class="text-xs text-emerald-300 font-bold mb-2">QUESTION ${i+1}</div>
+
+      <h3 class="font-bold">${escapeHtml(q.question)}</h3>
+
+      <div class="grid gap-2 mt-4">
+
+        ${q.options.map((o,j)=>`<button class="choice text-left rounded-xl p-3 text-sm" onclick="pick(${i},${j},${q.answer},this)">${String.fromCharCode(65+j)}. ${escapeHtml(o)}</button>`).join("")}
+
+      </div>
+
+      <div id="exp${i}" class="hidden mt-4 text-sm text-slate-400"></div>
+
+    </div>`).join("")
+
+}
+
+
+
+function pick(i,j,c,el){
+
+    const b=el.parentElement.querySelectorAll("button");
+
+    b.forEach(x=>x.disabled=true);
+
+    if(j===c)el.classList.add("correct");
+
+    else{el.classList.add("wrong");b[c].classList.add("correct")}
+
+    const x=document.getElementById("exp"+i);
+
+    x.classList.remove("hidden");
+
+    const q=window.__quizQuestions?.[i];
+
+    x.innerHTML="<b class='text-white'>Explanation:</b> "+escapeHtml(q?.explanation||"")
+
+}
+
+</script>
+
+</body>
+
+</html>
