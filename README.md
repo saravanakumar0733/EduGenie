@@ -5,7 +5,7 @@ EduGenie is an AI-powered educational learning assistant designed to help studen
 
 Team Details
 Team ID: SWTID-2026-1392
-Member 1: Saravankumar T (Team Leader)
+Member 1: Saravankumar T (Team Lead)
 Member 2: Shree E
 Member 3: Sathis Kumar M
 Member 4: Siva Karthick M
