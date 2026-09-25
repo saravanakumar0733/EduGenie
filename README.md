@@ -53,4 +53,4 @@ Demonstrating the complete EduGenie application and its AI-powered educational f
 Project Demo Video
 EduGenie – Google Gemini Powered Learning Assistant | Project Demonstration
 ## Demo Video
-[Watch Demo Video on Google Drive](https://drive.google.com/file/d/1a2-pAt1ebPcqQ4tmpW0tEyQo9eSr_RcY/view?usp=sharing)
+[Watch Demo Video on Google Drive](https://drive.google.com/file/d/1s3nXdoLaOJ7i951R5Y1l4OhI-TzyFj-4/view?usp=sharing)
